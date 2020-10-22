@@ -10,6 +10,18 @@ template <typename state_t, typename input_t, typename output_t, typename parame
 struct Base : public utilities::noncopyable {
   virtual ~Base() = default;
 
+  /*!
+   * \todo Find a standard way to add (names, description, min, max, precision);
+   * - Output
+   * - Input
+   * - Parameters
+   *
+   * and custom things like
+   * - Saturations
+   * - Setpoint
+   * - whatever?
+   */
+
   Parameter_vector getParameters() const                         = 0;
   void             setParameter(uint16_t i, const double& value) = 0;
 

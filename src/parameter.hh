@@ -6,16 +6,9 @@
 
 namespace simc {
 
-/**
- * Elements of the tuple:
- * - Name
- * - Unit
- * - Min
- * - Max
- * - Precision
- */
+// Elements in the tuple:    Name,        Unit,        Min,    Max,    Precision
 using Parameter = std::tuple<std::string, std::string, double, double, double>;
 
-using Parameter_vector = std::vector<parameter_t>;
+using Parameter_vector = std::vector<Parameter>;
 
 }  // namespace simc
