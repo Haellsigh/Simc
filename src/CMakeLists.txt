@@ -43,3 +43,8 @@ if(CCACHE_PROGRAM)
   set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
   set(CMAKE_CUDA_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
 endif()
+
+##### Libraries
+# Eigen
+find_package(Eigen3 CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE Eigen3::Eigen)

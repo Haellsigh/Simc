@@ -1,0 +1,9 @@
+{
+  "name": "simc",
+  "version-string": "0.1.0",
+  "description": "Simulation and control environment",
+  "homepage": "https://github.com/Haellsigh/Simc",
+  "dependencies": [
+    "eigen3"
+  ]
+}
