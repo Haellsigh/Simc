@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.19)
 add_executable(${PROJECT_NAME} "")
 target_sources(${PROJECT_NAME} PRIVATE
   main.cc
-  parameter.hh
+  signal.hh
 )
 
 add_subdirectory(utilities)
@@ -21,7 +21,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_EXTENSIONS OFF)
 if (MSVC)
-  target_compile_options(${PROJECT_NAME} PUBLIC /std:c++latest /Zc:__cplusplus)
+  target_compile_options(${PROJECT_NAME} PUBLIC /Zc:__cplusplus)
 endif()
 # Enable Link Time Optimization if available
 include(CheckIPOSupported)

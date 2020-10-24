@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <system/base.hh>
+#include <system/invertedpendulum.hh>
 
 int main()
 {

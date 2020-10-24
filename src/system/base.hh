@@ -1,39 +1,39 @@
 #pragma once
 
+#include <signal.hh>
 #include <utilities/noncopyable.hh>
 
-#include <parameter.hh>
+#include <vector>
 
 namespace simc::system {
 
-template <typename state_t, typename input_t, typename output_t, typename parameters_t>
+template <typename input_t, typename output_t>
 struct Base : public utilities::noncopyable {
   virtual ~Base() = default;
 
   /*!
-   * \todo Find a standard way to add (names, description, min, max, precision);
-   * - Output
-   * - Input
-   * - Parameters
+   * \brief Returns a description of all signals in the system.
    *
-   * and custom things like
-   * - Saturations
-   * - Setpoint
-   * - whatever?
+   * Lists inputs, outputs, parameters and setpoints.
+   *
+   * \return The description of all signals.
    */
+  virtual std::vector<Signal> getSignalsDescription() const = 0;
 
-  Parameter_vector getParameters() const                         = 0;
-  void             setParameter(uint16_t i, const double& value) = 0;
+  double getSignal(std::size_t i) { return signal_[i]; };
+  void   setSignal(std::size_t i, double value) { signal_[i] = value; }
 
-  void setParameters(const parameters_t& p) { m_parameters = p; }
-
-  virtual state_t  A(const state_t& x_k) = 0;
-  virtual state_t  B(const state_t& x_k) = 0;
-  virtual output_t C(const state_t& x_k) = 0;
-  virtual output_t D(const state_t& x_k) = 0;
+  /**
+   * !brief f
+   * !param x The last state of the system
+   * !param u The input of the system
+   * !param t The time in seconds
+   * !return The drivative of the system state, \dot x
+   */
+  virtual output_t f(const output_t& x, const input_t& u, const double& t) = 0;
 
  protected:
-  parameters_t m_parameters;
+  std::vector<double> signal_;
 };
 
 }  // namespace simc::system
