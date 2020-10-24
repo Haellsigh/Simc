@@ -28,6 +28,7 @@ Simulation and control environment
     - PID
     - Sliding mode
 
+> The following diagram explains the flow of the information from the digital world with the trajectory generator, controller and observer to the physical world with the system and sensors.
 ![Control theory](docs/control_theory.svg "Control theory")
 
 ### Working principle
