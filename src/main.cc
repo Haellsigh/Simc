@@ -1,10 +1,11 @@
-#include <iostream>
+#include <QApplication>
+#include "mainwindow.hh"
 
-#include <system/invertedpendulum.hh>
-
-int main()
+int main(int argc, char* argv[])
 {
-  std::cout << "test!\n";
+  QApplication     a(argc, argv);
+  simc::MainWindow w;
+  w.show();
 
-  return 0;
+  return a.exec();
 }

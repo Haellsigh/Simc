@@ -1,39 +1,44 @@
 #pragma once
 
-#include <signal.hh>
-#include <utilities/noncopyable.hh>
+#include "utilities/noncopyable.hh"
+#include "variable.hh"
 
-#include <vector>
+#include <array>
 
 namespace simc::system {
 
-template <typename input_t, typename output_t>
-struct Base : public utilities::noncopyable {
+/*!
+ * \brief Base class for a physical system.
+ *
+ * \tparam input_t The number of inputs, size(u)
+ * \tparam state_t The number of states, size(x)
+ * \tparam output_t The number of outputs, size(y)
+ */
+template <std::size_t input_size, std::size_t state_size, std::size_t output_size>
+struct Base : public VariableBase {
+  using input_t  = std::array<double, input_size>;
+  using state_t  = std::array<double, state_size>;
+  using output_t = std::array<double, output_size>;
+
   virtual ~Base() = default;
 
   /*!
-   * \brief Returns a description of all signals in the system.
-   *
-   * Lists inputs, outputs, parameters and setpoints.
-   *
-   * \return The description of all signals.
+   * \brief The state equation
+   * \param x_k The last state of the system
+   * \param u_k The current input of the system
+   * \return The derivative of the system state at step k
    */
-  virtual std::vector<Signal> getSignalsDescription() const = 0;
+  virtual state_t f(state_t const& x_k, input_t const& u_k) = 0;
 
-  double getSignal(std::size_t i) { return signal_[i]; };
-  void   setSignal(std::size_t i, double value) { signal_[i] = value; }
-
-  /**
-   * !brief f
-   * !param x The last state of the system
-   * !param u The input of the system
-   * !param t The time in seconds
-   * !return The drivative of the system state, \dot x
+  /*!
+   * \brief The output equation
+   * \param x_k The current state of the system
+   * \param u_k The current input of the system
+   * \return The output of the system at step k
    */
-  virtual output_t f(const output_t& x, const input_t& u, const double& t) = 0;
+  virtual output_t h(state_t const& x_k, input_t const& u_k) = 0;
 
  protected:
-  std::vector<double> signal_;
 };
 
 }  // namespace simc::system
