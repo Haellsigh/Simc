@@ -1,6 +1,5 @@
 #pragma once
 
-#include "utilities/noncopyable.hh"
 #include "variable.hh"
 
 #include <array>
@@ -8,11 +7,11 @@
 namespace simc::system {
 
 /*!
- * \brief Base class for a physical system.
+ * \brief Base class for a system.
  *
- * \tparam input_t The number of inputs, size(u)
- * \tparam state_t The number of states, size(x)
- * \tparam output_t The number of outputs, size(y)
+ * \tparam input_size The number of inputs, size(u)
+ * \tparam state_size The number of states, size(x)
+ * \tparam output_size The number of outputs, size(y)
  */
 template <std::size_t input_size, std::size_t state_size, std::size_t output_size>
 struct Base : public VariableBase {
@@ -37,8 +36,6 @@ struct Base : public VariableBase {
    * \return The output of the system at step k
    */
   virtual output_t h(state_t const& x_k, input_t const& u_k) = 0;
-
- protected:
 };
 
 }  // namespace simc::system

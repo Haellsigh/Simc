@@ -1,6 +1,6 @@
 #pragma once
 
-#include <system/base.hh>
+#include "system/base.hh"
 
 namespace simc::system {
 
@@ -10,7 +10,7 @@ namespace simc::system {
 struct InvertedPendulum : public Base<1, 4, 2> {
   InvertedPendulum()
   {
-    variable_description_ = {
+    this->variable_description_ = {
         // Parameters
         {Variable::Parameter, "g", "Gravitational constant", "m.s^-2", 9.81, 2},
         {Variable::Parameter, "M", "Cart mass", "kg", 1, 3},

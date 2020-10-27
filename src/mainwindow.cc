@@ -1,4 +1,6 @@
 #include "mainwindow.hh"
+
+#include "controller/pid.hh"
 #include "system/invertedpendulum.hh"
 
 #include <QDoubleSpinBox>
