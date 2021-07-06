@@ -1,6 +1,3 @@
 [submodule "vcpkg"]
 	path = vcpkg
 	url = https://github.com/microsoft/vcpkg.git
-[submodule "src/thirdparty/nodeeditor"]
-	path = src/thirdparty/nodeeditor
-	url = https://github.com/paceholder/nodeeditor.git
